@@ -20,8 +20,7 @@ import introsde.rest.model.Person;
 
 public class Writer {
 
-	public PeopleStore unmarshallXMLPeopleList(InputStream stream){
-		
+	public PeopleStore unmarshallXMLPeopleList(InputStream stream){		
 		PeopleStore people = null;
 		try{
 			JAXBContext jc = JAXBContext.newInstance(PeopleStore.class);    			
@@ -29,13 +28,11 @@ public class Writer {
     		Unmarshaller um = jc.createUnmarshaller();
     		people = (PeopleStore) um.unmarshal(stream);    		
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return people;		
 	}
 	
-	public Person unmarshallXMLPerson(InputStream stream){
-		
+	public Person unmarshallXMLPerson(InputStream stream){		
 		Person people = null;
 		try{
 			JAXBContext jc = JAXBContext.newInstance(Person.class);    			
@@ -43,13 +40,11 @@ public class Writer {
     		Unmarshaller um = jc.createUnmarshaller();
     		people = (Person) um.unmarshal(stream);
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return people;		
 	}
 	
-	public MeasureTypeStore unmarshallXMLMeasureDef(InputStream stream){
-		
+	public MeasureTypeStore unmarshallXMLMeasureDef(InputStream stream){		
 		MeasureTypeStore measureType = null;
 		try{
 			JAXBContext jc = JAXBContext.newInstance(MeasureTypeStore.class);    			
@@ -57,13 +52,11 @@ public class Writer {
     		Unmarshaller um = jc.createUnmarshaller();
     		measureType = (MeasureTypeStore) um.unmarshal(stream);
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return measureType;		
 	}
 	
-	public HealthMeasureStore unmarshallXMLHealthMeasureStore(InputStream stream){
-		
+	public HealthMeasureStore unmarshallXMLHealthMeasureStore(InputStream stream){		
 		HealthMeasureStore healthMeasure = null;
 		try{
 			JAXBContext jc = JAXBContext.newInstance(HealthMeasureStore.class);    			
@@ -71,13 +64,11 @@ public class Writer {
     		Unmarshaller um = jc.createUnmarshaller();
     		healthMeasure = (HealthMeasureStore) um.unmarshal(stream);
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return healthMeasure;		
 	}
 	
-	public HealthMeasureHistory unmarshallXMLHealthMeasureHistory(InputStream stream){
-		
+	public HealthMeasureHistory unmarshallXMLHealthMeasureHistory(InputStream stream){		
 		HealthMeasureHistory healthMeasure = null;
 		try{
 			JAXBContext jc = JAXBContext.newInstance(HealthMeasureStore.class);    			
@@ -85,13 +76,11 @@ public class Writer {
     		Unmarshaller um = jc.createUnmarshaller();
     		healthMeasure = (HealthMeasureHistory) um.unmarshal(stream);
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return healthMeasure;		
 	}
 	
-	public LifeStatus unmarshallXMLLifeStatus(InputStream stream){
-		
+	public LifeStatus unmarshallXMLLifeStatus(InputStream stream){		
 		LifeStatus lifeStatus = null;
 		try{
 			JAXBContext jc = JAXBContext.newInstance(LifeStatus.class);    			
@@ -99,13 +88,11 @@ public class Writer {
     		Unmarshaller um = jc.createUnmarshaller();
     		lifeStatus = (LifeStatus) um.unmarshal(stream);
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return lifeStatus;		
 	}
 	
-	public void marshallXML(Object obj, Class className){
-		
+	public void marshallXML(Object obj, Class className){		
 		try{
 			JAXBContext jc = JAXBContext.newInstance(className);   			
 			//Marshalling object
@@ -116,168 +103,198 @@ public class Writer {
 		catch(Exception e){e.printStackTrace();}
 	}
 	
-	public Person[] unmarshallJSON(InputStream stream){
-		
+	public Person[] unmarshallJSON(InputStream stream){		
 		Person[] person = null;		
 		try{			
 	        // Jackson Object Mapper
-			ObjectMapper mapper = new ObjectMapper();
-			
+			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
-			JaxbAnnotationModule module = new JaxbAnnotationModule();
-			
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
-			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
 			person = mapper.readValue(stream, Person[].class);			
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return person;
 	}
 	
-	public Person unmarshallJSONPerson(InputStream stream){
-		
+	public Person unmarshallJSONPerson(InputStream stream){		
 		Person person = null;		
 		try{			
 	        // Jackson Object Mapper
-			ObjectMapper mapper = new ObjectMapper();
-			
+			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
-			JaxbAnnotationModule module = new JaxbAnnotationModule();
-			
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
-			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
 			person = mapper.readValue(stream, Person.class);			
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return person;
 	}
 	
-	public MeasureDefinition[] unmarshallJSONMeasureType(InputStream stream){
-		
+	public MeasureDefinition[] unmarshallJSONMeasureType(InputStream stream){		
 		MeasureDefinition[] measure = null;		
 		try{			
 	        // Jackson Object Mapper
-			ObjectMapper mapper = new ObjectMapper();
-			
+			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
-			JaxbAnnotationModule module = new JaxbAnnotationModule();
-			
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
-			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
 			measure = mapper.readValue(stream, MeasureDefinition[].class);			
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return measure;
 	}
 	
-	public HealthMeasureHistory[] unmarshallJSONHealthMeasure(InputStream stream){
-		
+	public HealthMeasureHistory[] unmarshallJSONHealthMeasureList(InputStream stream){		
 		HealthMeasureHistory[] measure = null;		
 		try{			
 	        // Jackson Object Mapper
-			ObjectMapper mapper = new ObjectMapper();
-			
+			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
-			JaxbAnnotationModule module = new JaxbAnnotationModule();
-			
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
-			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
 			measure = mapper.readValue(stream, HealthMeasureHistory[].class);			
 		}
-		catch(Exception e){e.printStackTrace();}
-		
+		catch(Exception e){e.printStackTrace();}		
 		return measure;
 	}
 	
-	public void marshallJSON(Person[] object){
-		
-		try{
-			// Jackson Object Mapper
-			ObjectMapper mapper = new ObjectMapper();
-			
+	public HealthMeasureHistory unmarshallJSONHealthMeasure(InputStream stream){		
+		HealthMeasureHistory measure = null;		
+		try{			
+	        // Jackson Object Mapper
+			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
-			JaxbAnnotationModule module = new JaxbAnnotationModule();
-			
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
-			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
+			measure = mapper.readValue(stream, HealthMeasureHistory.class);			
+		}
+		catch(Exception e){e.printStackTrace();}		
+		return measure;
+	}
+	
+	public LifeStatus unmarshallJSONLifeStatus(InputStream stream){		
+		LifeStatus lifestatus = null;		
+		try{			
+	        // Jackson Object Mapper
+			ObjectMapper mapper = new ObjectMapper();			
+			// Adding the Jackson Module to process JAXB annotations
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
+			//Mapper configuration
+			mapper.registerModule(module);
+			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
+			lifestatus = mapper.readValue(stream, LifeStatus.class);			
+		}
+		catch(Exception e){e.printStackTrace();}		
+		return lifestatus;
+	}
+	
+	public void marshallJSON(Person[] object){	
+		try{
+			// Jackson Object Mapper
+			ObjectMapper mapper = new ObjectMapper();			
+			// Adding the Jackson Module to process JAXB annotations
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
+			//Mapper configuration
+			mapper.registerModule(module);
+			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
 			String result = mapper.writeValueAsString(object);
 			System.out.println(result); 						//marshalling into the System default output
 		}
 		catch(Exception e){e.printStackTrace();}
 	}
 	
-	public void marshallJSON(Person object){
-		
+	public void marshallJSON(Person object){		
 		try{
 			// Jackson Object Mapper
-			ObjectMapper mapper = new ObjectMapper();
-			
+			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
-			JaxbAnnotationModule module = new JaxbAnnotationModule();
-			
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
-			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
 			String result = mapper.writeValueAsString(object);
 			System.out.println(result); 						//marshalling into the System default output			
 		}
 		catch(Exception e){e.printStackTrace();}
 	}
 	
-	public void marshallJSON(MeasureDefinition[] object){
-		
+	public void marshallJSON(MeasureDefinition[] object){		
 		try{
 			// Jackson Object Mapper
-			ObjectMapper mapper = new ObjectMapper();
-			
+			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
-			JaxbAnnotationModule module = new JaxbAnnotationModule();
-			
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
-			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
 			String result = mapper.writeValueAsString(object);
 			System.out.println(result); 						//marshalling into the System default output			
 		}
 		catch(Exception e){e.printStackTrace();}
 	}
 	
-	public void marshallJSON(HealthMeasureHistory[] object){
-		
+	public void marshallJSON(HealthMeasureHistory[] object){		
 		try{
 			// Jackson Object Mapper
-			ObjectMapper mapper = new ObjectMapper();
-			
+			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
-			JaxbAnnotationModule module = new JaxbAnnotationModule();
-			
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
-			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
+			String result = mapper.writeValueAsString(object);
+			System.out.println(result); 						//marshalling into the System default output			
+		}
+		catch(Exception e){e.printStackTrace();}
+	}
+	
+	public void marshallJSON(HealthMeasureHistory object){		
+		try{
+			// Jackson Object Mapper
+			ObjectMapper mapper = new ObjectMapper();			
+			// Adding the Jackson Module to process JAXB annotations
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
+			//Mapper configuration
+			mapper.registerModule(module);
+			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
+			String result = mapper.writeValueAsString(object);
+			System.out.println(result); 						//marshalling into the System default output			
+		}
+		catch(Exception e){e.printStackTrace();}
+	}
+	
+	public void marshallJSON(LifeStatus object){		
+		try{
+			// Jackson Object Mapper
+			ObjectMapper mapper = new ObjectMapper();			
+			// Adding the Jackson Module to process JAXB annotations
+			JaxbAnnotationModule module = new JaxbAnnotationModule();			
+			//Mapper configuration
+			mapper.registerModule(module);
+			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
 			String result = mapper.writeValueAsString(object);
 			System.out.println(result); 						//marshalling into the System default output			
 		}
