@@ -12,17 +12,17 @@
      [java]         <healthProfile>
      [java]             <measureType>
      [java]                 <measureDefinition>
-     [java]                     <id>1</id>
-     [java]                     <measure>weight</measure>
-     [java]                 </measureDefinition>
-     [java]                 <value>96</value>
-     [java]             </measureType>
-     [java]             <measureType>
-     [java]                 <measureDefinition>
      [java]                     <id>2</id>
      [java]                     <measure>height</measure>
      [java]                 </measureDefinition>
      [java]                 <value>80.7</value>
+     [java]             </measureType>
+     [java]             <measureType>
+     [java]                 <measureDefinition>
+     [java]                     <id>1</id>
+     [java]                     <measure>weight</measure>
+     [java]                 </measureDefinition>
+     [java]                 <value>72</value>
      [java]             </measureType>
      [java]         </healthProfile>
      [java]     </person>
@@ -124,17 +124,17 @@
      [java]     <healthProfile>
      [java]         <measureType>
      [java]             <measureDefinition>
-     [java]                 <id>1</id>
-     [java]                 <measure>weight</measure>
-     [java]             </measureDefinition>
-     [java]             <value>96</value>
-     [java]         </measureType>
-     [java]         <measureType>
-     [java]             <measureDefinition>
      [java]                 <id>2</id>
      [java]                 <measure>height</measure>
      [java]             </measureDefinition>
      [java]             <value>80.7</value>
+     [java]         </measureType>
+     [java]         <measureType>
+     [java]             <measureDefinition>
+     [java]                 <id>1</id>
+     [java]                 <measure>weight</measure>
+     [java]             </measureDefinition>
+     [java]             <value>72</value>
      [java]         </measureType>
      [java]     </healthProfile>
      [java] </person>
@@ -151,17 +151,17 @@
      [java]     <healthProfile>
      [java]         <measureType>
      [java]             <measureDefinition>
-     [java]                 <id>1</id>
-     [java]                 <measure>weight</measure>
-     [java]             </measureDefinition>
-     [java]             <value>96</value>
-     [java]         </measureType>
-     [java]         <measureType>
-     [java]             <measureDefinition>
      [java]                 <id>2</id>
      [java]                 <measure>height</measure>
      [java]             </measureDefinition>
      [java]             <value>80.7</value>
+     [java]         </measureType>
+     [java]         <measureType>
+     [java]             <measureDefinition>
+     [java]                 <id>1</id>
+     [java]                 <measure>weight</measure>
+     [java]             </measureDefinition>
+     [java]             <value>72</value>
      [java]         </measureType>
      [java]     </healthProfile>
      [java] </person>
@@ -239,6 +239,16 @@
      [java]         <mid>1</mid>
      [java]         <value>67</value>
      [java]         <created>2013-11-23</created>
+     [java]     </measure>
+     [java]     <measure>
+     [java]         <mid>8</mid>
+     [java]         <value>96</value>
+     [java]         <created>2015-11-23</created>
+     [java]     </measure>
+     [java]     <measure>
+     [java]         <mid>9</mid>
+     [java]         <value>72</value>
+     [java]         <created>2015-11-23</created>
      [java]     </measure>
      [java] </healthMeasureHistories>
      [java] 
@@ -347,6 +357,16 @@
      [java]         <value>67</value>
      [java]         <created>2013-11-23</created>
      [java]     </measure>
+     [java]     <measure>
+     [java]         <mid>8</mid>
+     [java]         <value>96</value>
+     [java]         <created>2015-11-23</created>
+     [java]     </measure>
+     [java]     <measure>
+     [java]         <mid>9</mid>
+     [java]         <value>72</value>
+     [java]         <created>2015-11-23</created>
+     [java]     </measure>
      [java] </healthMeasureHistories>
      [java] 
      [java] 
@@ -375,6 +395,16 @@
      [java]     <measure>
      [java]         <mid>8</mid>
      [java]         <value>96</value>
+     [java]         <created>2015-11-23</created>
+     [java]     </measure>
+     [java]     <measure>
+     [java]         <mid>9</mid>
+     [java]         <value>72</value>
+     [java]         <created>2015-11-23</created>
+     [java]     </measure>
+     [java]     <measure>
+     [java]         <mid>10</mid>
+     [java]         <value>72</value>
      [java]         <created>2015-11-23</created>
      [java]     </measure>
      [java] </healthMeasureHistories>
@@ -611,6 +641,14 @@
      [java]   "mid" : 8,
      [java]   "value" : "96",
      [java]   "created" : "2015-11-23"
+     [java] }, {
+     [java]   "mid" : 9,
+     [java]   "value" : "72",
+     [java]   "created" : "2015-11-23"
+     [java] }, {
+     [java]   "mid" : 10,
+     [java]   "value" : "72",
+     [java]   "created" : "2015-11-23"
      [java] } ]
      [java] 
      [java] 
@@ -705,6 +743,14 @@
      [java]   "mid" : 8,
      [java]   "value" : "96",
      [java]   "created" : "2015-11-23"
+     [java] }, {
+     [java]   "mid" : 9,
+     [java]   "value" : "72",
+     [java]   "created" : "2015-11-23"
+     [java] }, {
+     [java]   "mid" : 10,
+     [java]   "value" : "72",
+     [java]   "created" : "2015-11-23"
      [java] } ]
      [java] 
      [java] 
@@ -734,6 +780,14 @@
      [java]   "mid" : 9,
      [java]   "value" : "72",
      [java]   "created" : "2015-11-23"
+     [java] }, {
+     [java]   "mid" : 10,
+     [java]   "value" : "72",
+     [java]   "created" : "2015-11-23"
+     [java] }, {
+     [java]   "mid" : 11,
+     [java]   "value" : "72",
+     [java]   "created" : "2015-11-23"
      [java] } ]
      [java] 
      [java] 
@@ -742,7 +796,7 @@
      [java] => HTTP Status: 201
      [java] 
      [java] 
-     [java] Request #6: GET /person/1/height Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] Request #6: GET /person/1/height Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
      [java] => Result: OK
      [java] => HTTP Status: 200
      [java] [ {

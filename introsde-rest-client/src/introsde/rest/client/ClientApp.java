@@ -885,7 +885,7 @@ public class ClientApp {
 			else
 				resultStatus = "ERROR";
 			
-			printHeader(6, "GET", "/person/"+storedIdPerson+"/"+storedMeasureType, "APPLICATION/XML", "APPLICATION/XML");		
+			printHeader(6, "GET", "/person/"+storedIdPerson+"/"+storedMeasureType, "APPLICATION/JSON", "APPLICATION/JSON");		
 			System.out.println("=> Result: "+ resultStatus);
 			System.out.println("=> HTTP Status: "+ httpStatus);
 			
