@@ -101,8 +101,10 @@
                 </fileset>
             </copy>
         </target>
-        <target name="execute.client" depends="compile"> <!--depends="install, compile"-->
+    	
+        <target name="execute.client" depends="install, compile"> 
             <echo message="start introsde.rest.client.ClientApp in ${build.dir}" />
+        	<record name="client-server.log" action="start" append="false"/>
             <java classname="introsde.rest.client.ClientApp" classpath="${build.dir}" fork="true">
                 <arg value="$JAVA_OPTS  -cp" />
                 <classpath>
@@ -113,18 +115,6 @@
                     </fileset>
                 </classpath>
             </java>
-        </target>         	
-    	<target name="execute.GetPeopleByID">
-			<echo message="=> Executing getPeopleByID: with ID=5" />
-			<java classname="HealthProfileXMLReader" classpath="${build.dir}">
-				<classpath>
-					<fileset dir="${lib.dir}">
-						<include name="**/*.jar" />
-						<include name="*.jar" />
-					</fileset>
-				</classpath>
-				<arg value="getPeopleByID"/>		
-			    <arg value="5"/>			
-			</java>
-		</target>
+        	<record name="client-server.log" action="stop"/>
+        </target>      	
     </project>

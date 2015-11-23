@@ -15,7 +15,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.*;
 
 import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.jackson.JacksonFeature;
+import com.owlike.genson.ext.jaxrs.GensonJsonConverter;
 
 import introsde.rest.dao.PeopleStore;
 import introsde.rest.dao.HealthMeasureStore;
@@ -47,16 +47,15 @@ public class ClientApp {
 	static String resultStatus = null;
 	static String[] measure_types = null;
 	
-	public static void main(String[] args) throws IOException, Exception {		
-		final String SERVER_URL = "http://localhost:5700/sdelab";				
+	public static void main(String[] args) throws IOException, Exception {	
+		//RESTFul Web Service URL deployed on Heroku
+		final String SERVER_URL = "https://introsde-181499.herokuapp.com/sdelab";		
 			
 		try{
-			ClientConfig clientConfig = new ClientConfig();				
+			final ClientConfig clientConfig = new ClientConfig()
+					.register(GensonJsonConverter.class);			
 			Client client = ClientBuilder.newClient(clientConfig);
-			WebTarget service = client.target(getBaseURI(SERVER_URL));			
-			Client jsonClient = ClientBuilder.newClient(clientConfig)
-					.register(JacksonFeature.class);							
-			WebTarget jsonService = jsonClient.target(getBaseURI(SERVER_URL));
+			WebTarget service = client.target(getBaseURI(SERVER_URL));				
 			Writer writer = new Writer();
 			ClientApp clientApp = new ClientApp();
 			
@@ -165,7 +164,7 @@ public class ClientApp {
 			 * R#4 (POST BASE_URL/person)
 			 */	
 			//Create a new person object with id {newIdPerson}
-			int newIdPerson = 500;
+			int newIdPerson = last_person_id + 1;
 			
 			LifeStatus weight = new LifeStatus();
 			weight.setMeasureDefinition(new MeasureDefinition(1)); 
@@ -284,7 +283,8 @@ public class ClientApp {
 			for(int h=0; h<idPerson.length; h++){ //Iterate for the first and the last person
 				for(int i=0; i<measure_types.length; i++){	//Iterate for the all measureTypes that each person has		
 					//Get the HealthMeasureHistory
-					response = service.path("person/"+idPerson[h]+"/"+measure_types[i]).request().accept(MediaType.APPLICATION_XML).get();
+					response = service.path("person/"+idPerson[h]+"/"+measure_types[i]).request()
+							.accept(MediaType.APPLICATION_XML).get();
 					results = response.readEntity(String.class);
 					httpStatus = response.getStatus();
 					
@@ -346,6 +346,8 @@ public class ClientApp {
 			/*
 			 * Step 3.9
 			 */
+			int countHealthMeasure = 0;
+			
 			//Get HealthMeasureHistory for the first person
 			response = service.path("person/"+first_person_id+"/"+measure_types[0]).request().accept(MediaType.APPLICATION_XML).get();
 			results = response.readEntity(String.class);
@@ -356,7 +358,7 @@ public class ClientApp {
 			
 			//Un-marshall HealthMeasureHistory xml String into HealthMeasureStore object
 			healthMeasure = writer.unmarshallXMLHealthMeasureStore(stream);
-			int countHealthMeasure = healthMeasure.getData().size();
+			countHealthMeasure = healthMeasure.getData().size();
 			
 			if(httpStatus == 200 || httpStatus == 201)
 				resultStatus = "OK";
@@ -427,6 +429,53 @@ public class ClientApp {
 			System.out.println("\n");
 			clientApp.clearVariables();
 			
+			/*
+			 * Step 3.10
+			 */
+			//Set a new value for HealthMeasureHistory object got from GET BASE_URL/person/{id}/{measureTypes}/{mid}
+			healthMeasureHsitory.setValue("90");
+			healthMeasureHsitory.setTimestamp("2011-12-09");
+			
+			response = service.path("person/"+storedIdPerson+"/"+storedMeasureType+"/"+mid).request(MediaType.APPLICATION_XML)
+					.put(Entity.entity(healthMeasureHsitory, MediaType.APPLICATION_XML), Response.class);
+			httpStatus = response.getStatus();				
+						
+			if(httpStatus == 200 || httpStatus == 201)
+				resultStatus = "OK";
+			else
+				resultStatus = "ERROR";
+			
+			printHeader(10, "PUT", "/person/"+storedIdPerson+"/"+storedMeasureType+"/"+mid, "APPLICATION/XML", "APPLICATION/XML");		
+			System.out.println("=> Result: "+ resultStatus);
+			System.out.println("=> HTTP Status: "+ httpStatus);						
+			System.out.println("\n");
+			clientApp.clearVariables();			
+			
+			//Get HealthMeasureStore which has just been updated
+			response = service.path("person/"+storedIdPerson+"/"+storedMeasureType).request()
+					.accept(MediaType.APPLICATION_XML).get();
+			results = response.readEntity(String.class);
+			httpStatus = response.getStatus();
+			
+			//Convert string into inputStream
+			stream = new ByteArrayInputStream(results.getBytes(StandardCharsets.UTF_8));
+			
+			//Un-marshall HealthMeasureHistory xml String into HealthMeasureStore object
+			healthMeasure = writer.unmarshallXMLHealthMeasureStore(stream);
+			if(httpStatus == 200 || httpStatus == 201)
+				resultStatus = "OK";
+			else
+				resultStatus = "ERROR";
+			
+			printHeader(6, "GET", "/person/"+storedIdPerson+"/"+storedMeasureType, "APPLICATION/XML", "APPLICATION/XML");		
+			System.out.println("=> Result: "+ resultStatus);
+			System.out.println("=> HTTP Status: "+ httpStatus);
+			
+			//Marshall HealthMeasureHistory object into the system default output
+			writer.marshallXML(healthMeasure, HealthMeasureStore.class);
+			System.out.println("\n");
+			clientApp.clearVariables();
+			
 			//Release all objects before the execution using APPLICATION_JSON 
 			person = null;
 			people = null;
@@ -436,6 +485,7 @@ public class ClientApp {
 			storedIdPerson = 0;
 			storedMeasureType = "";
 			measure_types = null;
+			healthMeasureHsitory = null;
 						
 			/*
 			 * Begin all executions using APPLICATION_JSON
@@ -503,42 +553,42 @@ public class ClientApp {
 			 * R#3 (PUT BASE_URL/person/first_person_id)
 			 */		
 			//Change the first name of the first person to Frank
-//			person.setName("Frank");
-//			
-//			//Update the person with the new first name			
-//			response = jsonService.path("person/"+first_person_id).request(MediaType.APPLICATION_JSON)
-//						.put(Entity.entity(person, MediaType.APPLICATION_JSON), Response.class);
-//			httpStatus = response.getStatus();
-//			
-//			//Get the updated person
-//			results = service.path("person/"+first_person_id).request().accept(MediaType.APPLICATION_JSON).get()
-//						.readEntity(String.class);
-//			
-//			//Convert string into inputStream
-//			stream = new ByteArrayInputStream(results.getBytes(StandardCharsets.UTF_8));
-//			
-//			//Un-marshall person xml String into person object
-//			person = writer.unmarshallJSONPerson(stream);
-//			//Check if the first name of the person has been changed to Frank
-//			if(person.getName().equalsIgnoreCase("Frank"))
-//				resultStatus = "OK";
-//			else
-//				resultStatus = "ERROR";
-//						
-//			printHeader(3, "PUT", "/person/"+first_person_id, "APPLICATION/JSON", "APPLICATION/JSON");		
-//			System.out.println("=> Result: "+ resultStatus);
-//			System.out.println("=> HTTP Status: "+ httpStatus);
-//			
-//			//Marshall person object into the system default output
-//			writer.marshallJSON(person);
-//			System.out.println("\n");
-//			clientApp.clearVariables();
+			person.setName("Frank");
+			
+			//Update the person with the new first name			
+			response = service.path("person/"+first_person_id).request().accept(MediaType.APPLICATION_JSON)
+						.put(Entity.entity(person, MediaType.APPLICATION_JSON), Response.class);
+			httpStatus = response.getStatus();
+			
+			//Get the updated person
+			results = service.path("person/"+first_person_id).request().accept(MediaType.APPLICATION_JSON).get()
+						.readEntity(String.class);
+			
+			//Convert string into inputStream
+			stream = new ByteArrayInputStream(results.getBytes(StandardCharsets.UTF_8));
+			
+			//Un-marshall person xml String into person object
+			person = writer.unmarshallJSONPerson(stream);
+			//Check if the first name of the person has been changed to Frank
+			if(person.getName().equalsIgnoreCase("Frank"))
+				resultStatus = "OK";
+			else
+				resultStatus = "ERROR";
+						
+			printHeader(3, "PUT", "/person/"+first_person_id, "APPLICATION/JSON", "APPLICATION/JSON");		
+			System.out.println("=> Result: "+ resultStatus);
+			System.out.println("=> HTTP Status: "+ httpStatus);
+			
+			//Marshall person object into the system default output
+			writer.marshallJSON(person);
+			System.out.println("\n");
+			clientApp.clearVariables();
 			
 			/*
 			 * R#4 (POST BASE_URL/person)
 			 */	
 			//Create a new person object with id {newIdPerson}
-			newIdPerson = 560;
+			newIdPerson = last_person_id + 1;
 			
 			weight = new LifeStatus();
 			weight.setMeasureDefinition(new MeasureDefinition(1)); 
@@ -559,30 +609,30 @@ public class ClientApp {
 			newPerson.setBirthdate("1945-01-01");
 					
 			//POST a new person 
-//			response = jsonService.path("person").request(MediaType.APPLICATION_JSON)
-//					.post(Entity.entity(newPerson, MediaType.APPLICATION_JSON), Response.class);
-//			httpStatus = response.getStatus();
-//			results = response.readEntity(String.class);
-//			System.out.println("results: "+results);
-//			//Convert string into inputStream
-//			stream = new ByteArrayInputStream(results.getBytes(StandardCharsets.UTF_8));
-//			
-//			//Un-marshall person xml String into person object
-//			person = writer.unmarshallJSONPerson(stream);
-//			//Check if the first name of the people has been changed to Matheo
-//			if(person.getIdPerson() == newIdPerson)
-//				resultStatus = "OK";
-//			else
-//				resultStatus = "ERROR";
-//			
-//			printHeader(4, "POST", "/person", "APPLICATION/JSON", "APPLICATION/JSON");		
-//			System.out.println("=> Result: "+ resultStatus);
-//			System.out.println("=> HTTP Status: "+ httpStatus);
-//			
-//			//Marshall person object into the system default output
-//			writer.marshallJSON(person);
-//			System.out.println("\n");
-//			clientApp.clearVariables();
+			response = service.path("person").request().accept(MediaType.APPLICATION_JSON)
+					.post(Entity.entity(newPerson, MediaType.APPLICATION_JSON), Response.class);
+			httpStatus = response.getStatus();
+			results = response.readEntity(String.class);
+			
+			//Convert string into inputStream
+			stream = new ByteArrayInputStream(results.getBytes(StandardCharsets.UTF_8));
+			
+			//Un-marshall person xml String into person object
+			person = writer.unmarshallJSONPerson(stream);
+			//Check if the first name of the people has been changed to Matheo
+			if(person.getIdPerson() == newIdPerson)
+				resultStatus = "OK";
+			else
+				resultStatus = "ERROR";
+			
+			printHeader(4, "POST", "/person", "APPLICATION/JSON", "APPLICATION/JSON");		
+			System.out.println("=> Result: "+ resultStatus);
+			System.out.println("=> HTTP Status: "+ httpStatus);
+			
+			//Marshall person object into the system default output
+			writer.marshallJSON(person);
+			System.out.println("\n");
+			clientApp.clearVariables();
 			
 			/*
 			 * R#5 (DELETE BASE_URL/person/newIdPerson)
@@ -747,29 +797,29 @@ public class ClientApp {
 			lifeStatus.setMeasureDefinition(new MeasureDefinition(1));
 			
 			//POST a new HealthProfile and a new archive in HealthMeasureHistory for the first person
-//			response = service.path("person/"+first_person_id+"/"+measure_types[0]).request(MediaType.APPLICATION_JSON)
-//					.post(Entity.entity(lifeStatus, MediaType.APPLICATION_JSON), Response.class);
-//			httpStatus = response.getStatus();	
-//			results = response.readEntity(String.class);
-//				
-//			//Convert string into inputStream
-//			stream = new ByteArrayInputStream(results.getBytes(StandardCharsets.UTF_8));
-//			
-//			//Un-marshall LifeStatus xml String into LifeStatus object
-//			lifeStatus = writer.unmarshallJSONLifeStatus(stream);
-//			if(httpStatus == 200 || httpStatus == 201)
-//				resultStatus = "OK";
-//			else
-//				resultStatus = "ERROR";
-//			
-//			printHeader(8, "POST", "/person/"+first_person_id+"/"+measure_types[0], "APPLICATION/JSON", "APPLICATION/JSON");		
-//			System.out.println("=> Result: "+ resultStatus);
-//			System.out.println("=> HTTP Status: "+ httpStatus);
-//			
-//			//Marshall LifeStatus object into the system default output
-//			writer.marshallJSON(lifeStatus);
-//			System.out.println("\n");
-//			clientApp.clearVariables();
+			response = service.path("person/"+first_person_id+"/"+measure_types[0]).request(MediaType.APPLICATION_JSON)
+					.post(Entity.entity(lifeStatus, MediaType.APPLICATION_JSON), Response.class);
+			httpStatus = response.getStatus();	
+			results = response.readEntity(String.class);
+				
+			//Convert string into inputStream
+			stream = new ByteArrayInputStream(results.getBytes(StandardCharsets.UTF_8));
+			
+			//Un-marshall LifeStatus xml String into LifeStatus object
+			lifeStatus = writer.unmarshallJSONLifeStatus(stream);
+			if(httpStatus == 200 || httpStatus == 201)
+				resultStatus = "OK";
+			else
+				resultStatus = "ERROR";
+			
+			printHeader(8, "POST", "/person/"+first_person_id+"/"+measure_types[0], "APPLICATION/JSON", "APPLICATION/JSON");		
+			System.out.println("=> Result: "+ resultStatus);
+			System.out.println("=> HTTP Status: "+ httpStatus);
+			
+			//Marshall LifeStatus object into the system default output
+			writer.marshallJSON(lifeStatus);
+			System.out.println("\n");
+			clientApp.clearVariables();
 					
 			//Get updated HealthMeasureHistory for the first person, for the second time after POST request
 			response = service.path("person/"+first_person_id+"/"+measure_types[0]).request()
@@ -796,6 +846,53 @@ public class ClientApp {
 			writer.marshallJSON(healthMeasureList);
 			System.out.println("\n");
 			clientApp.clearVariables();
+			
+			/*
+			 * Step 3.10
+			 */
+			//Set a new value for HealthMeasureHistory object got from GET BASE_URL/person/{id}/{measureTypes}/{mid}
+			healthMeasureHsitory.setValue("90");
+			healthMeasureHsitory.setTimestamp("2011-12-09");
+			
+			response = service.path("person/"+storedIdPerson+"/"+storedMeasureType+"/"+mid).request(MediaType.APPLICATION_JSON)
+					.put(Entity.entity(healthMeasureHsitory, MediaType.APPLICATION_JSON), Response.class);
+			httpStatus = response.getStatus();				
+						
+			if(httpStatus == 200 || httpStatus == 201)
+				resultStatus = "OK";
+			else
+				resultStatus = "ERROR";
+			
+			printHeader(10, "PUT", "/person/"+storedIdPerson+"/"+storedMeasureType+"/"+mid, "APPLICATION/JSON", "APPLICATION/JSON");		
+			System.out.println("=> Result: "+ resultStatus);
+			System.out.println("=> HTTP Status: "+ httpStatus);						
+			System.out.println("\n");
+			clientApp.clearVariables();			
+			
+			//Get HealthMeasureStore which has just been updated
+			response = service.path("person/"+storedIdPerson+"/"+storedMeasureType).request()
+					.accept(MediaType.APPLICATION_JSON).get();
+			results = response.readEntity(String.class);
+			httpStatus = response.getStatus();
+			
+			//Convert string into inputStream
+			stream = new ByteArrayInputStream(results.getBytes(StandardCharsets.UTF_8));
+			
+			//Un-marshall HealthMeasureHistory xml String into HealthMeasureStore object
+			healthMeasureList = writer.unmarshallJSONHealthMeasureList(stream);
+			if(httpStatus == 200 || httpStatus == 201)
+				resultStatus = "OK";
+			else
+				resultStatus = "ERROR";
+			
+			printHeader(6, "GET", "/person/"+storedIdPerson+"/"+storedMeasureType, "APPLICATION/XML", "APPLICATION/XML");		
+			System.out.println("=> Result: "+ resultStatus);
+			System.out.println("=> HTTP Status: "+ httpStatus);
+			
+			//Marshall HealthMeasureStore object into the system default output
+			writer.marshallJSON(healthMeasureList);
+			System.out.println("\n");
+			clientApp.clearVariables();
 
 		}
 		catch(Exception e){
@@ -815,8 +912,7 @@ public class ClientApp {
 	private void clearVariables(){		
 		httpStatus = 0;
 		results = null;
-		resultStatus = null;
-		healthMeasureHsitory = null;
+		resultStatus = null;		
 		measureType = null;
 		healthMeasure = null;
 		response = null;

@@ -22,13 +22,16 @@ import javax.persistence.PersistenceUnit;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Stateless // will work only inside a Java EE application
@@ -165,4 +168,34 @@ public class PersonCollectionResource {
     	    	
     	return lifeStatus;
     }
+    
+    @PUT
+    @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("{personId}/{measureType}/{mid}")
+    public Response  updateHealthMeasure(HealthMeasureHistory healthMeasure, @PathParam("personId") int id, 
+    	@PathParam("measureType") String measureType, @PathParam("mid") int mid){
+    	Response res;
+    	int idMeasureDef = 0;
+    	
+    	Person person = Person.getPersonById(id);
+    	if(person == null)
+    		throw new NotFoundException();
+
+    	MeasureDefinition measureDef = MeasureDefinition.getIdMeasureDef(measureType);
+    	idMeasureDef = measureDef.getIdMeasureDef();
+    	
+    	HealthMeasureHistory exisiting = HealthMeasureHistory.getMeasureByMid(id, idMeasureDef, mid);
+    	
+    	if(exisiting != null){
+    		healthMeasure.setPerson(person);
+    		healthMeasure.setMeasureDefinition(new MeasureDefinition(idMeasureDef));
+    		HealthMeasureHistory.updateHealthMeasureHistory(healthMeasure);
+    		res = Response.created(uriInfo.getAbsolutePath()).build();    		
+    	}
+    	else
+    		throw new NotFoundException();
+    	
+    	return res; 	    	
+    }
+
 }

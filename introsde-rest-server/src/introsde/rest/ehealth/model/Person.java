@@ -72,6 +72,9 @@ public class Person implements Serializable {
     	this.lifeStatus.add(lifeStatus);
     }      
     
+    public Person(){    	
+    }
+    
     // getters
     public int getIdPerson(){
         return this.idPerson;

@@ -1,7 +1,11 @@
 package introsde.rest.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -40,12 +44,15 @@ public class HealthMeasureHistory implements Serializable {
 		this.idMeasureHistory = idMeasureHistory;
 	}
 
-	public Date getTimestamp() {
-		return this.timestamp;
+	public String getTimestamp() {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(timestamp);
 	}
 
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+	public void setTimestamp(String timestamp) throws ParseException{
+    	DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    	Date date = format.parse(timestamp);
+        this.timestamp = date;
 	}
 
 	public String getValue() {

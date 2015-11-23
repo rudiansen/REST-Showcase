@@ -24,10 +24,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import introsde.rest.ehealth.dao.LifePlayerDao;
 
-/**
- * The persistent class for the "LifeStatus" database table.
- * 
- */
 @Entity
 @Table(name = "LifeStatus")
 @NamedQueries({

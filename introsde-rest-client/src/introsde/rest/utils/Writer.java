@@ -113,7 +113,7 @@ public class Writer {
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);				
 			person = mapper.readValue(stream, Person[].class);			
 		}
 		catch(Exception e){e.printStackTrace();}		
@@ -122,7 +122,7 @@ public class Writer {
 	
 	public Person unmarshallJSONPerson(InputStream stream){		
 		Person person = null;		
-		try{			
+		try{								
 	        // Jackson Object Mapper
 			ObjectMapper mapper = new ObjectMapper();			
 			// Adding the Jackson Module to process JAXB annotations
@@ -130,7 +130,7 @@ public class Writer {
 			//Mapper configuration
 			mapper.registerModule(module);
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);			
+			mapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);					
 			person = mapper.readValue(stream, Person.class);			
 		}
 		catch(Exception e){e.printStackTrace();}		
@@ -299,5 +299,5 @@ public class Writer {
 			System.out.println(result); 						//marshalling into the System default output			
 		}
 		catch(Exception e){e.printStackTrace();}
-	}
+	}		
 }

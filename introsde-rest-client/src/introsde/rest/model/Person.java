@@ -34,7 +34,7 @@ public class Person implements Serializable {
     private String username;
     @XmlTransient
     private String email;
-//    @XmlElementWrapper(name="healthProfile")
+    @XmlElementWrapper(name="healthProfile")
     @XmlElement(name="measureType")
     private List<LifeStatus> lifeStatus;
     
