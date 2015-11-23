@@ -1,0 +1,754 @@
+     [java] Server URL ==> https://introsde-181499.herokuapp.com/sdelab
+     [java] 
+     [java] Request #1: GET /person Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <people>
+     [java]     <person id="1">
+     [java]         <firstname>Frank</firstname>
+     [java]         <lastname>Lampard</lastname>
+     [java]         <birthdate>1978-06-20</birthdate>
+     [java]         <healthProfile>
+     [java]             <measureType>
+     [java]                 <measureDefinition>
+     [java]                     <id>1</id>
+     [java]                     <measure>weight</measure>
+     [java]                 </measureDefinition>
+     [java]                 <value>96</value>
+     [java]             </measureType>
+     [java]             <measureType>
+     [java]                 <measureDefinition>
+     [java]                     <id>2</id>
+     [java]                     <measure>height</measure>
+     [java]                 </measureDefinition>
+     [java]                 <value>80.7</value>
+     [java]             </measureType>
+     [java]         </healthProfile>
+     [java]     </person>
+     [java]     <person id="2">
+     [java]         <firstname>John</firstname>
+     [java]         <lastname>Terry</lastname>
+     [java]         <birthdate>1980-07-12</birthdate>
+     [java]         <healthProfile>
+     [java]             <measureType>
+     [java]                 <measureDefinition>
+     [java]                     <id>1</id>
+     [java]                     <measure>weight</measure>
+     [java]                 </measureDefinition>
+     [java]                 <value>1.87</value>
+     [java]             </measureType>
+     [java]             <measureType>
+     [java]                 <measureDefinition>
+     [java]                     <id>2</id>
+     [java]                     <measure>height</measure>
+     [java]                 </measureDefinition>
+     [java]                 <value>1.90</value>
+     [java]             </measureType>
+     [java]         </healthProfile>
+     [java]     </person>
+     [java]     <person id="3">
+     [java]         <firstname>Ashley</firstname>
+     [java]         <lastname>Cole</lastname>
+     [java]         <birthdate>1980-12-20</birthdate>
+     [java]         <healthProfile/>
+     [java]     </person>
+     [java]     <person id="4">
+     [java]         <firstname>Rio</firstname>
+     [java]         <lastname>Ferdinand</lastname>
+     [java]         <birthdate>1978-11-07</birthdate>
+     [java]         <healthProfile/>
+     [java]     </person>
+     [java]     <person id="5">
+     [java]         <firstname>Joe</firstname>
+     [java]         <lastname>Hart</lastname>
+     [java]         <birthdate>1987-04-19</birthdate>
+     [java]         <healthProfile/>
+     [java]     </person>
+     [java]     <person id="6">
+     [java]         <firstname>Steven</firstname>
+     [java]         <lastname>Gerrard</lastname>
+     [java]         <birthdate>1980-05-30</birthdate>
+     [java]         <healthProfile/>
+     [java]     </person>
+     [java]     <person id="7">
+     [java]         <firstname>Raheem</firstname>
+     [java]         <lastname>Sterling</lastname>
+     [java]         <birthdate>1994-12-08</birthdate>
+     [java]         <healthProfile/>
+     [java]     </person>
+     [java]     <person id="8">
+     [java]         <firstname>Adam</firstname>
+     [java]         <lastname>Lallana</lastname>
+     [java]         <birthdate>1988-05-10</birthdate>
+     [java]         <healthProfile/>
+     [java]     </person>
+     [java]     <person id="9">
+     [java]         <firstname>Wayne</firstname>
+     [java]         <lastname>Rooney</lastname>
+     [java]         <birthdate>1986-12-10</birthdate>
+     [java]         <healthProfile/>
+     [java]     </person>
+     [java]     <person id="10">
+     [java]         <firstname>Michael</firstname>
+     [java]         <lastname>Carrick</lastname>
+     [java]         <birthdate>1981-07-28</birthdate>
+     [java]         <healthProfile>
+     [java]             <measureType>
+     [java]                 <measureDefinition>
+     [java]                     <id>1</id>
+     [java]                     <measure>weight</measure>
+     [java]                 </measureDefinition>
+     [java]                 <value>75.6</value>
+     [java]             </measureType>
+     [java]             <measureType>
+     [java]                 <measureDefinition>
+     [java]                     <id>2</id>
+     [java]                     <measure>height</measure>
+     [java]                 </measureDefinition>
+     [java]                 <value>1.65</value>
+     [java]             </measureType>
+     [java]         </healthProfile>
+     [java]     </person>
+     [java] </people>
+     [java] 
+     [java] 
+     [java] Request #2: GET /person/1 Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <person id="1">
+     [java]     <firstname>Frank</firstname>
+     [java]     <lastname>Lampard</lastname>
+     [java]     <birthdate>1978-06-20</birthdate>
+     [java]     <healthProfile>
+     [java]         <measureType>
+     [java]             <measureDefinition>
+     [java]                 <id>1</id>
+     [java]                 <measure>weight</measure>
+     [java]             </measureDefinition>
+     [java]             <value>96</value>
+     [java]         </measureType>
+     [java]         <measureType>
+     [java]             <measureDefinition>
+     [java]                 <id>2</id>
+     [java]                 <measure>height</measure>
+     [java]             </measureDefinition>
+     [java]             <value>80.7</value>
+     [java]         </measureType>
+     [java]     </healthProfile>
+     [java] </person>
+     [java] 
+     [java] 
+     [java] Request #3: PUT /person/1 Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 201
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <person id="1">
+     [java]     <firstname>Matheo</firstname>
+     [java]     <lastname>Lampard</lastname>
+     [java]     <birthdate>1978-06-20</birthdate>
+     [java]     <healthProfile>
+     [java]         <measureType>
+     [java]             <measureDefinition>
+     [java]                 <id>1</id>
+     [java]                 <measure>weight</measure>
+     [java]             </measureDefinition>
+     [java]             <value>96</value>
+     [java]         </measureType>
+     [java]         <measureType>
+     [java]             <measureDefinition>
+     [java]                 <id>2</id>
+     [java]                 <measure>height</measure>
+     [java]             </measureDefinition>
+     [java]             <value>80.7</value>
+     [java]         </measureType>
+     [java]     </healthProfile>
+     [java] </person>
+     [java] 
+     [java] 
+     [java] Request #4: POST /person Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <person id="11">
+     [java]     <firstname>Chuck</firstname>
+     [java]     <lastname>Norris</lastname>
+     [java]     <birthdate>1945-01-01</birthdate>
+     [java]     <healthProfile>
+     [java]         <measureType>
+     [java]             <measureDefinition>
+     [java]                 <id>1</id>
+     [java]             </measureDefinition>
+     [java]             <value>78.9</value>
+     [java]         </measureType>
+     [java]         <measureType>
+     [java]             <measureDefinition>
+     [java]                 <id>2</id>
+     [java]             </measureDefinition>
+     [java]             <value>172</value>
+     [java]         </measureType>
+     [java]     </healthProfile>
+     [java] </person>
+     [java] 
+     [java] 
+     [java] Request #5: DELETE /person/11 Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 404
+     [java] 
+     [java] 
+     [java] 
+     [java] Request #9: GET /measureTypes Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <measureDefinitions>
+     [java]     <measureDefinition>
+     [java]         <id>1</id>
+     [java]         <measure>weight</measure>
+     [java]     </measureDefinition>
+     [java]     <measureDefinition>
+     [java]         <id>2</id>
+     [java]         <measure>height</measure>
+     [java]     </measureDefinition>
+     [java]     <measureDefinition>
+     [java]         <id>3</id>
+     [java]         <measure>steps</measure>
+     [java]     </measureDefinition>
+     [java]     <measureDefinition>
+     [java]         <id>4</id>
+     [java]         <measure>bloodpressure</measure>
+     [java]     </measureDefinition>
+     [java]     <measureDefinition>
+     [java]         <id>5</id>
+     [java]         <measure>heartrate</measure>
+     [java]     </measureDefinition>
+     [java]     <measureDefinition>
+     [java]         <id>6</id>
+     [java]         <measure>bmi</measure>
+     [java]     </measureDefinition>
+     [java] </measureDefinitions>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/weight Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories>
+     [java]     <measure>
+     [java]         <mid>1</mid>
+     [java]         <value>67</value>
+     [java]         <created>2013-11-23</created>
+     [java]     </measure>
+     [java] </healthMeasureHistories>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/height Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories>
+     [java]     <measure>
+     [java]         <mid>3</mid>
+     [java]         <value>90</value>
+     [java]         <created>2011-12-09</created>
+     [java]     </measure>
+     [java] </healthMeasureHistories>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/steps Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/bloodpressure Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/heartrate Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/bmi Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/weight Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/height Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/steps Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/bloodpressure Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/heartrate Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/bmi Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories/>
+     [java] 
+     [java] 
+     [java] Request #7: GET /person/1/height/3 Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <measure>
+     [java]     <mid>3</mid>
+     [java]     <value>90</value>
+     [java]     <created>2011-12-09</created>
+     [java] </measure>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/weight Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories>
+     [java]     <measure>
+     [java]         <mid>1</mid>
+     [java]         <value>67</value>
+     [java]         <created>2013-11-23</created>
+     [java]     </measure>
+     [java] </healthMeasureHistories>
+     [java] 
+     [java] 
+     [java] Request #8: POST /person/1/weight Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <lifeStatus>
+     [java]     <measureDefinition>
+     [java]         <id>1</id>
+     [java]     </measureDefinition>
+     [java]     <value>72</value>
+     [java] </lifeStatus>
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/weight Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories>
+     [java]     <measure>
+     [java]         <mid>1</mid>
+     [java]         <value>67</value>
+     [java]         <created>2013-11-23</created>
+     [java]     </measure>
+     [java]     <measure>
+     [java]         <mid>8</mid>
+     [java]         <value>96</value>
+     [java]         <created>2015-11-23</created>
+     [java]     </measure>
+     [java] </healthMeasureHistories>
+     [java] 
+     [java] 
+     [java] Request #10: PUT /person/1/height/3 Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 201
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/height Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     [java] <healthMeasureHistories>
+     [java]     <measure>
+     [java]         <mid>3</mid>
+     [java]         <value>90</value>
+     [java]         <created>2011-12-09</created>
+     [java]     </measure>
+     [java] </healthMeasureHistories>
+     [java] 
+     [java] 
+     [java] Request #1: GET /person Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] [ {
+     [java]   "id" : 1,
+     [java]   "firstname" : "Matheo",
+     [java]   "lastname" : "Lampard",
+     [java]   "birthdate" : "1978-06-20",
+     [java]   "measureType" : [ {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 2,
+     [java]       "measure" : "height"
+     [java]     },
+     [java]     "value" : "80.7"
+     [java]   }, {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 1,
+     [java]       "measure" : "weight"
+     [java]     },
+     [java]     "value" : "72"
+     [java]   } ]
+     [java] }, {
+     [java]   "id" : 2,
+     [java]   "firstname" : "John",
+     [java]   "lastname" : "Terry",
+     [java]   "birthdate" : "1980-07-12",
+     [java]   "measureType" : [ {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 1,
+     [java]       "measure" : "weight"
+     [java]     },
+     [java]     "value" : "1.87"
+     [java]   }, {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 2,
+     [java]       "measure" : "height"
+     [java]     },
+     [java]     "value" : "1.90"
+     [java]   } ]
+     [java] }, {
+     [java]   "id" : 3,
+     [java]   "firstname" : "Ashley",
+     [java]   "lastname" : "Cole",
+     [java]   "birthdate" : "1980-12-20",
+     [java]   "measureType" : [ ]
+     [java] }, {
+     [java]   "id" : 4,
+     [java]   "firstname" : "Rio",
+     [java]   "lastname" : "Ferdinand",
+     [java]   "birthdate" : "1978-11-07",
+     [java]   "measureType" : [ ]
+     [java] }, {
+     [java]   "id" : 5,
+     [java]   "firstname" : "Joe",
+     [java]   "lastname" : "Hart",
+     [java]   "birthdate" : "1987-04-19",
+     [java]   "measureType" : [ ]
+     [java] }, {
+     [java]   "id" : 6,
+     [java]   "firstname" : "Steven",
+     [java]   "lastname" : "Gerrard",
+     [java]   "birthdate" : "1980-05-30",
+     [java]   "measureType" : [ ]
+     [java] }, {
+     [java]   "id" : 7,
+     [java]   "firstname" : "Raheem",
+     [java]   "lastname" : "Sterling",
+     [java]   "birthdate" : "1994-12-08",
+     [java]   "measureType" : [ ]
+     [java] }, {
+     [java]   "id" : 8,
+     [java]   "firstname" : "Adam",
+     [java]   "lastname" : "Lallana",
+     [java]   "birthdate" : "1988-05-10",
+     [java]   "measureType" : [ ]
+     [java] }, {
+     [java]   "id" : 9,
+     [java]   "firstname" : "Wayne",
+     [java]   "lastname" : "Rooney",
+     [java]   "birthdate" : "1986-12-10",
+     [java]   "measureType" : [ ]
+     [java] }, {
+     [java]   "id" : 10,
+     [java]   "firstname" : "Michael",
+     [java]   "lastname" : "Carrick",
+     [java]   "birthdate" : "1981-07-28",
+     [java]   "measureType" : [ {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 1,
+     [java]       "measure" : "weight"
+     [java]     },
+     [java]     "value" : "75.6"
+     [java]   }, {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 2,
+     [java]       "measure" : "height"
+     [java]     },
+     [java]     "value" : "1.65"
+     [java]   } ]
+     [java] } ]
+     [java] 
+     [java] 
+     [java] Request #2: GET /person/1 Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] {
+     [java]   "id" : 1,
+     [java]   "firstname" : "Matheo",
+     [java]   "lastname" : "Lampard",
+     [java]   "birthdate" : "1978-06-20",
+     [java]   "measureType" : [ {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 2,
+     [java]       "measure" : "height"
+     [java]     },
+     [java]     "value" : "80.7"
+     [java]   }, {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 1,
+     [java]       "measure" : "weight"
+     [java]     },
+     [java]     "value" : "72"
+     [java]   } ]
+     [java] }
+     [java] 
+     [java] 
+     [java] Request #3: PUT /person/1 Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 201
+     [java] {
+     [java]   "id" : 1,
+     [java]   "firstname" : "Frank",
+     [java]   "lastname" : "Lampard",
+     [java]   "birthdate" : "1978-06-20",
+     [java]   "measureType" : [ {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 2,
+     [java]       "measure" : "height"
+     [java]     },
+     [java]     "value" : "80.7"
+     [java]   }, {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 1,
+     [java]       "measure" : "weight"
+     [java]     },
+     [java]     "value" : "72"
+     [java]   } ]
+     [java] }
+     [java] 
+     [java] 
+     [java] Request #4: POST /person Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] {
+     [java]   "id" : 11,
+     [java]   "firstname" : "Chuck",
+     [java]   "lastname" : "Norris",
+     [java]   "birthdate" : "1945-01-01",
+     [java]   "measureType" : [ {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 1
+     [java]     },
+     [java]     "value" : "78.9"
+     [java]   }, {
+     [java]     "measureDefinition" : {
+     [java]       "id" : 2
+     [java]     },
+     [java]     "value" : "172"
+     [java]   } ]
+     [java] }
+     [java] 
+     [java] 
+     [java] Request #5: DELETE /person/11 Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 404
+     [java] 
+     [java] 
+     [java] 
+     [java] Request #9: GET /measureTypes Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] [ {
+     [java]   "id" : 1,
+     [java]   "measure" : "weight"
+     [java] }, {
+     [java]   "id" : 2,
+     [java]   "measure" : "height"
+     [java] }, {
+     [java]   "id" : 3,
+     [java]   "measure" : "steps"
+     [java] }, {
+     [java]   "id" : 4,
+     [java]   "measure" : "bloodpressure"
+     [java] }, {
+     [java]   "id" : 5,
+     [java]   "measure" : "heartrate"
+     [java] }, {
+     [java]   "id" : 6,
+     [java]   "measure" : "bmi"
+     [java] } ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/weight Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] [ {
+     [java]   "mid" : 1,
+     [java]   "value" : "67",
+     [java]   "created" : "2013-11-23"
+     [java] }, {
+     [java]   "mid" : 8,
+     [java]   "value" : "96",
+     [java]   "created" : "2015-11-23"
+     [java] } ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/height Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] [ {
+     [java]   "mid" : 3,
+     [java]   "value" : "90",
+     [java]   "created" : "2011-12-09"
+     [java] } ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/steps Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/bloodpressure Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/heartrate Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/bmi Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/weight Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/height Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/steps Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/bloodpressure Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/heartrate Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/10/bmi Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: ERROR
+     [java] => HTTP Status: 200
+     [java] [ ]
+     [java] 
+     [java] 
+     [java] Request #7: GET /person/1/height/3 Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] {
+     [java]   "mid" : 3,
+     [java]   "value" : "90",
+     [java]   "created" : "2011-12-09"
+     [java] }
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/weight Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] [ {
+     [java]   "mid" : 1,
+     [java]   "value" : "67",
+     [java]   "created" : "2013-11-23"
+     [java] }, {
+     [java]   "mid" : 8,
+     [java]   "value" : "96",
+     [java]   "created" : "2015-11-23"
+     [java] } ]
+     [java] 
+     [java] 
+     [java] Request #8: POST /person/1/weight Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] {
+     [java]   "measureDefinition" : {
+     [java]     "id" : 1
+     [java]   },
+     [java]   "value" : "72"
+     [java] }
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/weight Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] [ {
+     [java]   "mid" : 1,
+     [java]   "value" : "67",
+     [java]   "created" : "2013-11-23"
+     [java] }, {
+     [java]   "mid" : 8,
+     [java]   "value" : "96",
+     [java]   "created" : "2015-11-23"
+     [java] }, {
+     [java]   "mid" : 9,
+     [java]   "value" : "72",
+     [java]   "created" : "2015-11-23"
+     [java] } ]
+     [java] 
+     [java] 
+     [java] Request #10: PUT /person/1/height/3 Accept: APPLICATION/JSON Content-Type: APPLICATION/JSON
+     [java] => Result: OK
+     [java] => HTTP Status: 201
+     [java] 
+     [java] 
+     [java] Request #6: GET /person/1/height Accept: APPLICATION/XML Content-Type: APPLICATION/XML
+     [java] => Result: OK
+     [java] => HTTP Status: 200
+     [java] [ {
+     [java]   "mid" : 3,
+     [java]   "value" : "90",
+     [java]   "created" : "2011-12-09"
+     [java] } ]
+     [java] 
+     [java] 
